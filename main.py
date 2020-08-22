@@ -1,10 +1,13 @@
+import os
 import requests
+from dotenv import load_dotenv
 import datetime
 import base64
 import json
+from youtube_search import YoutubeSearch
 
-client_id = "78104017828e4ae4bcdce82968f74763"
-client_secret = "2841edfcac9d4f0288107d08248ffa5c"
+client_id = os.getenv("ID")
+client_secret = os.getenv("SECRET")
 
 client_creds = f"{client_id}:{client_secret}"
 client_creds_b64 = base64.b64encode(client_creds.encode())
@@ -23,14 +26,16 @@ accessdata = r.json()
 access_token = accessdata["access_token"]
 
 valid_request = r.status_code in range(200, 299)
+playlist_tracks = []
 
-if valid_request:
-    playlist_tracks = []
-    playlist_id = "3FcROySC4sOrVEHOLFGD3i"
+if valid_request:  
+    #url = input("Enter the spotify playlist URL: ")
+    #playlist_id = url[url.find('playlist/') + len("playlist/"): url.find('?')]
     headers_get_playlist={
         "Authorization" : f"Bearer {access_token}"
     }
-    url_playlist = "https://api.spotify.com/v1/playlists/" + playlist_id +"/tracks"
+    #url_playlist = "https://api.spotify.com/v1/playlists/" + playlist_id +"/tracks"
+    url_playlist = "https://api.spotify.com/v1/playlists/" + "1keGqANUxXBbBny4dtLcf5" +"/tracks"
     r = requests.get(url_playlist ,headers= headers_get_playlist)
     playlist_dict = r.json()
 
@@ -40,3 +45,5 @@ if valid_request:
             temp += " - " + str(artists["name"])
             
         print(temp)
+        results = YoutubeSearch(temp, max_results=1).to_dict()
+        print(results[0]["url_suffix"])
