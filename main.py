@@ -32,10 +32,11 @@ if valid_request:
     }
     url_playlist = "https://api.spotify.com/v1/playlists/" + playlist_id +"/tracks"
     r = requests.get(url_playlist ,headers= headers_get_playlist)
-    new_playlist_dict = r.json()
+    playlist_dict = r.json()
 
-    for items in new_playlist_dict["items"]:
+    for items in playlist_dict["items"]:
+        temp = str(items["track"]["name"])
         for artists in items["track"]["artists"]:
-            print(artists["name"])
+            temp += " - " + str(artists["name"])
             
-        print()
+        print(temp)
