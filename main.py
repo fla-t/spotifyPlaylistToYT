@@ -1,6 +1,7 @@
 import requests
 import datetime
 import base64
+import json
 
 client_id = "78104017828e4ae4bcdce82968f74763"
 client_secret = "2841edfcac9d4f0288107d08248ffa5c"
@@ -24,11 +25,17 @@ access_token = accessdata["access_token"]
 valid_request = r.status_code in range(200, 299)
 
 if valid_request:
+    playlist_tracks = []
     playlist_id = "3FcROySC4sOrVEHOLFGD3i"
     headers_get_playlist={
         "Authorization" : f"Bearer {access_token}"
     }
     url_playlist = "https://api.spotify.com/v1/playlists/" + playlist_id +"/tracks"
+    r = requests.get(url_playlist ,headers= headers_get_playlist)
+    new_playlist_dict = r.json()
 
-r = requests.get(url_playlist ,headers= headers_get_playlist)
-print(r.json())
+    for items in new_playlist_dict["items"]:
+        for artists in items["track"]["artists"]:
+            print(artists["name"])
+            
+        print()
