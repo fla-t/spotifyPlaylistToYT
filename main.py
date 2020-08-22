@@ -1,9 +1,9 @@
 import os
 import requests
-from dotenv import load_dotenv
 import datetime
 import base64
 import json
+from dotenv import load_dotenv
 from youtube_search import YoutubeSearch
 
 client_id = os.getenv("ID")
@@ -46,4 +46,4 @@ if valid_request:
             
         print(temp)
         results = YoutubeSearch(temp, max_results=1).to_dict()
-        print(results[0]["url_suffix"])
+        print("youtube.com" + results[0]["url_suffix"])
