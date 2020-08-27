@@ -7,8 +7,8 @@ import unicodedata
 from dotenv import load_dotenv
 from youtube_search import YoutubeSearch
 
-client_id = "78104017828e4ae4bcdce82968f74763"
-client_secret = "59d0bfe6d81146518eeccc078e2cdb0a"
+client_id = ""
+client_secret = ""
 
 client_creds = f"{client_id}:{client_secret}"
 client_creds_b64 = base64.b64encode(client_creds.encode())
