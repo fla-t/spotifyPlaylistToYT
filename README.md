@@ -2,7 +2,7 @@
 converts a spotify playlist To YouTube Links.
 
 
-#steps
+# steps
 
 1. you have to get client id and client secret from spotify dashboard
 2. once my code has generated a links.txt you can have a chrome extension open these links for you
