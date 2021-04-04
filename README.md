@@ -1,4 +1,4 @@
-# spotifyPlaylistToYT
+# spotifyPlaylistToYT (outdated)
 converts a spotify playlist To YouTube Links.
 
 
